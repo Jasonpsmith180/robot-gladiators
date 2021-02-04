@@ -1,6 +1,3 @@
-// Alert players that they are starting the round
-window.alert("Welcome to Robot Gladiators!");
-
 // This creates a prompt to ask for the player robot's name and establishes health and attack values
 var playerName = window.prompt("What is your robot's name?");
 var playerHealth = 100;
@@ -90,7 +87,17 @@ var fight = function(enemyName)
 // THIS EXECUTES THE FUNCTION NAMED "FIGHT"
 for (var i = 0; i < enemyNames.length; i++)
 {
-    var pickedEnemyName = enemyNames[i];
-    enemyHealth = 50;
-    fight(pickedEnemyName);
+    // Alert players that they are starting the round
+    if (playerHealth > 0 ) {
+        window.alert("Welcome to Robot Gladiators! Round " + ( i = 1 ) );
+        
+        // pick new enemy to fight based on the index of the enemyNames array
+        var pickedEnemyName = enemyNames[i];
+
+        // Reset enemyHealth before starting new fight
+        enemyHealth = 50;
+
+        // Pass the pickedEnemyName variable's value into the fight function
+        fight(pickedEnemyName);
+    }
 }
