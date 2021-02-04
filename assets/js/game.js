@@ -95,5 +95,7 @@ var fight = function(enemyName)
 // THIS EXECUTES THE FUNCTION NAMED "FIGHT"
 for (var i = 0; i < enemyNames.length; i++)
 {
-    fight(enemyNames[i]);
+    var pickedEnemyName = enemyNames[i];
+    enemyHealth = 50;
+    fight(pickedEnemyName);
 }
