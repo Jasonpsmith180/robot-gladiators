@@ -32,6 +32,19 @@ var startGame = function()
 
             // Pass the pickedEnemyName variable's value into the fight function
             fight(pickedEnemyName);
+
+            // If we are not at the last enemy in the array
+            if (playerHealth > 0 && i < enemyNames.length - 1)
+            {
+                // Ask if okayer wants to use the store before next round
+                var storeConfirm = window.confirm("The fight is over, visit the store before the next round?");
+
+                // If yes take them to the store
+                if(storeConfirm) 
+                {
+                    shop();
+                }
+            }
         }
         else 
         {
@@ -46,7 +59,7 @@ var startGame = function()
 // Function to end the entire game
 var endGame = function() 
 {
-    window.alert("The game has now ended. Let's see how you did!")
+    window.alert("The game has now ended. Let's see how you did!");
 
     var playAgainConfirm = window.confirm("Would you like to play again?");
 
@@ -60,6 +73,60 @@ var endGame = function()
     }
 };
 
+// Shop function
+var shop = function()
+{
+    // Ask player what they'd like to do
+    var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the shop? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
+
+    switch (shopOptionPrompt)
+    {
+        case "REFILL":
+        case "refill":
+            if (playerMoney >= 7)
+            {
+                window.alert("Refilling player's health by 20 for 7 dollars.");
+        
+                // Increase health and decrease money
+                playerHealth = playerHealth + 20;
+                playerMoney = playerMoney - 7;
+            }
+            else
+            {
+                window.alert("You don't have enough money!");
+            }
+            break;
+        
+        case "UPGRADE":
+        case "upgrade":
+            if (playerMoney >= 7)
+            {
+                window.alert("Upgrading player's attack by 6 for 7 dollars.");
+
+                // Increase attack and decrease money
+                playerAttack = playerAttack + 6;
+                playerMoney = playerMoney - 7;
+            }
+            else
+            {
+                window.alert("You don't have enough money!")
+            }
+            break;
+
+        case "LEAVE":
+        case "leave":
+            window.alert("Leaving the store.");
+
+            // Do nothing so function will end
+            break;
+
+        default:
+            window.alert("You did not pick a valid option. Try again.");
+            shop();
+            break;
+    }
+};
+
 // This creates a function named "fight"
 var fight = function(enemyName) 
 {
@@ -67,7 +134,7 @@ var fight = function(enemyName)
     {
 
         // Alert and ask player if they want to fight or skip the battle
-        var promptFight = window.prompt("Would you like to FIGHT or SKIP the battle? Enter 'Fight' or 'Skip' to choose.")
+        var promptFight = window.prompt("Would you like to FIGHT or SKIP the battle? Enter 'Fight' or 'Skip' to choose.");
 
         // If player chooses to skip
         if (promptFight === "skip" || promptFight === "SKIP") 
@@ -107,7 +174,7 @@ var fight = function(enemyName)
         }
         else 
         {
-            window.alert(enemyName + " still has " + enemyHealth + " health left.")
+            window.alert(enemyName + " still has " + enemyHealth + " health left.");
         }
 
         // Subtract the value of 'enemyAttack' from the value of 'playerHealth' and use that result to updat the value in the 'playerHealth' variable
