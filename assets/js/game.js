@@ -143,22 +143,28 @@ var fight = function(enemy)
 var shop = function()
 {
     // Ask player what they'd like to do
-    var shopOptionPrompt = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the shop? Please enter one: 'REFILL', 'UPGRADE', or 'LEAVE' to make a choice.");
+    var shopOptionPrompt = window.prompt(
+        "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the shop? : Please enter 1 for REFILL, 2 for UPGRADE, or 3 to LEAVE."
+        );
+    
+    if (shopOptionPrompt === "" || shopOptionPrompt === null)
+    {
+        window.alert("You need to provide a valid answer! Please try again.");
+        return shop();
+    }
 
+    shopOptionPrompt = parseInt(shopOptionPrompt);
     switch (shopOptionPrompt)
     {
-        case "REFILL":
-        case "refill":
-            refillHealth();
+        case 1:
+            playerInfo.refillHealth();
             break;
         
-        case "UPGRADE":
-        case "upgrade":
-            upgradeAttack();
+        case 2:
+            playerInfo.upgradeAttack();
             break;
 
-        case "LEAVE":
-        case "leave":
+        case 3:
             window.alert("Leaving the store.");
             // Do nothing so function will end
             break;
@@ -228,7 +234,7 @@ var fightOrSkip = function()
 }
 
 
-// This creates a prompt to ask for the player robot's name and establishes health and attack values
+/* GAME INFORMATION / VARIABLES */
 var playerInfo = 
 {
     name: getPlayerName(),
@@ -245,7 +251,7 @@ var playerInfo =
     {
         if (playerInfo.money >= 7)
             {
-                window.alert("Upgrading player's attack by 6 for 7 dollars.");
+                window.alert("Refilling player's health by 20 for 7 dollars.");
                 // Increase attack and decrease money
                 this.health += 20;
                 this.money -= 7;
